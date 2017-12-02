@@ -8,3 +8,7 @@ authors = ["Dominic Black <me@jdm.black>"]
 [[bin]]
 name = "day-02-part1"
 path = "src/part1.rs"
+
+[[bin]]
+name = "day-02-part2"
+path = "src/part2.rs"
