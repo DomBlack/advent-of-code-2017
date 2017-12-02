@@ -4,3 +4,11 @@ version = "0.1.0"
 authors = ["Dominic Black <me@jdm.black>"]
 
 [dependencies]
+
+[[bin]]
+name = "day-01-part1"
+path = "src/part1.rs"
+
+[[bin]]
+name = "day-01-part2"
+path = "src/part2.rs"
