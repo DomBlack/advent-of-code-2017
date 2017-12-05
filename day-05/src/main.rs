@@ -33,27 +33,23 @@ fn main() {
 /// `2  5  0  1  -2`  - jump `4` steps forward, escaping the maze.
 fn no_of_jumps(input: &str, modifier: &Fn(i32) -> i32) -> i32 {
     let mut list: Vec<i32> =
-        input
-            .split_whitespace().map(|i| i.parse().expect("Unable to parse input"))
+        input.lines()
+            .map(|i| i.parse().expect("Unable to parse input"))
             .collect();
 
     let mut ptr = 0;
     let mut steps = 0;
 
-    loop {
-        match list.get_mut(ptr) {
-            Some(offset) => {
-                steps += 1;
-                let new_ptr = ptr as i32 + *offset;
-                *offset = modifier(*offset);
+    while let Some(offset) = list.get_mut(ptr) {
+        steps += 1;
+        let new_ptr = ptr as i32 + *offset;
+        *offset = modifier(*offset);
 
-                if new_ptr < 0 {
-                    break;
-                } else {
-                    ptr = new_ptr as usize;
-                }
-            }
-            None => break,
+        if new_ptr < 0 {
+            // we've broken out of the maze
+            break;
+        } else {
+            ptr = new_ptr as usize;
         }
     }
 
