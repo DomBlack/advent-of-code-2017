@@ -11,30 +11,29 @@ fn how_many_cycles(input: &str, return_cycle_size: bool) -> u32 {
     use std::collections::HashMap;
 
     let mut banks: Vec<u32> = input.split_whitespace()
-            .map( | num | num.parse().expect("Invalid"))
-            .collect();
+        .map(|num| num.parse().expect("Invalid"))
+        .collect();
 
     let mut states_seen = HashMap::new();
 
 
     let mut counter = 0;
+    let len = banks.len();
 
     while states_seen.contains_key(&banks) == false {
         states_seen.insert(banks.clone(), counter);
 
         counter = counter + 1;
 
-        let max_index = max_by_index(&banks);
-        let mut left_to_split = banks[max_index];
-        banks[max_index] = 0;
+        if let Some((max_index, &max_value)) =
+            banks.iter().enumerate().rev()
+            .max_by_key(|&(_, val)| val) {
 
-        let mut indexes =
-            (0 .. banks.len()).cycle().skip(max_index + 1);
+            banks[max_index] = 0;
 
-        while left_to_split > 0 {
-            let index = indexes.next().unwrap();
-            banks[index] += 1;
-            left_to_split -= 1;
+            (0..len).cycle()
+                .skip(max_index + 1).take(max_value as usize)
+                .for_each(|i| banks[i] += 1);
         }
     }
 
@@ -45,30 +44,10 @@ fn how_many_cycles(input: &str, return_cycle_size: bool) -> u32 {
     }
 }
 
-/// Returns the index of the maximum value found (if multiple then the first one)
-fn max_by_index(banks: &Vec<u32>) -> usize {
-    let mut max_value = 0;
-    let mut max_index = 0;
-
-    for index in 0 .. banks.len() {
-        if banks[index] > max_value {
-            max_value = banks[index];
-            max_index = index;
-        }
-    }
-
-    max_index
-}
-
 
 #[cfg(test)]
 mod test {
     use super::*;
-
-    #[test]
-    fn test_max_by_index() {
-        assert_eq!(max_by_index(&vec![ 0, 3, 1, 2, 3]), 1);
-    }
 
     #[test]
     fn part1_example() {
