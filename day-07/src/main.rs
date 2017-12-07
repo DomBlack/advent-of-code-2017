@@ -7,7 +7,12 @@ mod tower;
 
 #[cfg(not(test))]
 fn main() {
-    println!("Hello World");
+    let bottom = tower::read_tower(INPUT);
+
+    println!("Part 1: {}", bottom.name);
+
+    let change = bottom.required_change_to_balance();
+    println!("Part 2: {:?}", change);
 }
 
 #[cfg(test)]
@@ -16,7 +21,7 @@ mod test {
 
     #[test]
     fn test_read_tower() {
-        tower::read_tower("
+        let bottom = tower::read_tower("
             pbga (66)
             xhth (57)
             ebii (61)
@@ -31,5 +36,11 @@ mod test {
             gyxo (61)
             cntj (57)
         ");
+
+        assert_eq!(bottom.name, "tknk");
+
+        println!("Part 2");
+        bottom.print();
+        assert_eq!(bottom.required_change_to_balance(), Some(60));
     }
 }
