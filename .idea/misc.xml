@@ -10,8 +10,9 @@
     <cargoProject FILE="$PROJECT_DIR$/day-06/Cargo.toml" />
     <cargoProject FILE="$PROJECT_DIR$/day-07/Cargo.toml" />
     <cargoProject FILE="$PROJECT_DIR$/day-08/Cargo.toml" />
+    <cargoProject FILE="$PROJECT_DIR$/day-09/Cargo.toml" />
   </component>
   <component name="RustProjectSettings">
-    <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
+    <option name="toolchainHomeDirectory" value="D:/Rust/Cargo/bin" />
   </component>
 </project>
