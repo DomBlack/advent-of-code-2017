@@ -1,0 +1,7 @@
+[package]
+name = "day-12"
+version = "0.1.0"
+authors = ["Dominic Black <me@jdm.black>"]
+
+[dependencies]
+petgraph = "0.4.10"
