@@ -1,4 +1,4 @@
-#[cfg(not(test))]
+    #[cfg(not(test))]
 fn main() {
     println!("Part 1: {}", next_value(354, 2017));
     println!("Part 2: {}", first_value(354, 50_000_000));
